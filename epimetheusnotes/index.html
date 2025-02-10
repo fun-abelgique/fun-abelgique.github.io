@@ -169,7 +169,7 @@
   </style>
 </head>
 
-<body onload="JavaSScript()" onbeforeunload="LocalStorageIt()">
+<body> <!-- onload="JavaSScript()" onbeforeunload="LocalStorageIt()" -->
   <div class="alignitems">
     <img src="../../../../assets/favicons/logo.png" alt="Logo">
     <nav>
@@ -181,16 +181,16 @@
   <p></p>
   <div class="alignitems" style="background-color: #121212; padding: 3px">
     <button id="newnote">+ New Note</button>
-    <a href="javascript:recoverNote();">
+    <!-- <a href="javascript:recoverNote();"> -->
       <button id="recovernote">
         <span style="color: #aaccff">Recover/Duplicate Notes</span>
       </button>
-    </a>
-    <a href="javascript:deleteAllForever();">
+    <!-- </a> -->
+    <!-- <a href="javascript:deleteAllForever();"> -->
       <button id="deleteallforever">
         <span style="color: #ff0000">Delete All Notes FOREVER</span>
       </button>
-    </a>
+    <!-- </a> -->
     &nbsp;
     <div title="When you create, open, rename, or delete a note while editing another note, the current note will be saved and closed before performing the functions listed above. 
       
@@ -233,8 +233,8 @@ Unfortunately, this app might be completely broken. We are attempting to look in
   </table>
   <script>
     /// replace the use of readOnly === false with display === block or something
-    document.getElementById("newnote").addEventListener("click", newNote);
-    
+
+    // variables
     var notes;
     var noteNames;
 
@@ -483,6 +483,14 @@ Unfortunately, this app might be completely broken. We are attempting to look in
         return;
       }
     }
+
+    // event listeners
+    document.getElementById("newnote").addEventListener("click", newNote);
+    document.getElementById("recovernote").addEventListener("click", recoverNote);
+    document.getElementById("deleteallforever").addEventListener("click", deleteAllForever);
+
+    window.addEventListener("load", JavaSScript);
+    window.addEventListener("beforeunload", LocalStorageIt);
 
   </script>
 </body>
