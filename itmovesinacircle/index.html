@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="It really does move in a circle, doesn't it?\nIt is not recommended to leave this page running in the background for long periods of time, as it may affect your computer's ability to work with large files.">
+    <title>itmovesinacircle</title>
+    <style>
+      html {
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        font-family: monospace;
+        color: #ffffff;
+        background-color: #222233;
+      }
+      .gray {
+        color: #999999;
+      }
+      .blue {
+        color: #bbbbff;
+      }
+      #thingy {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        bottom: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #ff0000;
+        border: 1px solid #ff0000;
+        border-radius: 50%;
+      }
+      #aroundspan, #lolspan {
+        text-decoration: underline;
+      }
+    </style>
+    <link href="favicon.png" rel="icon">
+  </head>
+  <body onload="whyDoINeedThis()">
+    <p>
+      <span id="lolparagraph"></span>
+      <span class="gray">&lt;&#8729;</span>&nbsp;It has moved in a circle&nbsp;<span id="aroundspan">unknown, as it has not completed its movement in a circle yet</span>&nbsp;times. You have recieved the above message&nbsp;<span id="lolspan">unknown, as the messages have not loaded yet</span>&nbsp;times.
+      <br>
+      <span class="blue">&gt;_</span>
+      <br>
+    </p>
+    <div id="thingy"></div>
+    <script>
+
+const thingy = document.getElementById("thingy");
+const lolParagraph = document.getElementById("lolparagraph");
+const lolSpan = document.getElementById("lolspan");
+const aroundSpan = document.getElementById("aroundspan");
+
+let ii = 0;
+let lolTimes;
+let aroundTimes;
+function whyDoINeedThis() {
+  if ((localStorage.getItem("loltimes")) || ((localStorage.getItem("aroundtimes") < 2000)) && (localStorage.getItem("loltimes") < 1000)) {
+    lolTimes = localStorage.getItem("loltimes");
+  } else {
+    lolTimes = 0;
+  }
+  if ((localStorage.getItem("aroundtimes")) || ((localStorage.getItem("aroundtimes") < 2000)) && (localStorage.getItem("loltimes") < 1000)) {
+    aroundTimes = localStorage.getItem("aroundtimes");
+  } else {
+    aroundTimes = 0;
+  }
+}
+
+function moveIt() {
+  let x = Math.sin(ii);
+  let y = Math.cos(ii);
+  thingy.style.transform = 'translate(' + (x * 200) + 'px,' + (y * 200) + 'px)';
+  if (ii >= (Math.PI * 2)) {
+    ii = 0;
+    updateOther();
+  } else {
+    ii += 0.01;
+  }
+}
+
+function updateOther() {
+  aroundTimes++;
+  aroundSpan.innerHTML = aroundTimes;
+}
+
+function lol() {
+  lolTimes++;
+  if (lolParagraph.innerHTML == "") {
+    for (var i = 0; i < lolTimes; i++) {
+      lolParagraph.innerHTML += "<span class='gray'>&lt;&#8729;</span>&nbsp;It really does move in a circle, doesn't it?<br>";
+    }
+  } else {
+    lolParagraph.innerHTML += "<span class='gray'>&lt;&#8729;</span>&nbsp;It really does move in a circle, doesn't it?<br>"
+  }
+  lolSpan.innerHTML = lolTimes;
+}
+
+window.addEventListener("beforeunload", function () {
+  localStorage.setItem("loltimes", lolTimes);
+  localStorage.setItem("aroundtimes", aroundTimes);
+});
+
+setInterval(moveIt, 1);
+setInterval(lol, 12345);
+      
+    </script>
+  </body>
+</html>

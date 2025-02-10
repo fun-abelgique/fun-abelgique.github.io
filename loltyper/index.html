@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>LolTyper</title>
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    p {
+      font-family: monospace;
+      color: #00ff00;
+    }
+  </style>
+</head>
+
+<body>
+  <p id="code"></p>
+  <script>
+    const codeElement = document.getElementById("code");
+    let count = 0;
+    let code = ['HAI', ' 1.', '2<br><br>',' I ', 'HAS', ' A ', 'V1<br>',' I ', 'HAS', ' A ', 'V2<br>', 'I H', 'AS ', 'A C', 'HOI', 'CE<br>', 'VIS', 'IBL', 'E "', 'VAL', 'UE1', '"<br>G', 'IMM', 'EH ', 'V1<br>', 'VIS', 'IBL', 'E "', 'VAL', 'UE2', '"<br>G', 'IMM', 'EH ', 'V2V', 'ISI', 'BLE', ' "C', 'hoo', 'se ', 'Ope', 'rat', 'ion', '? +', ' - ', '* /', '"<br>G', 'IMM', 'EH ', 'CHO', 'ICE', ' CH', 'OIC', 'E, ', 'WTF', '?<br>O', 'MG ', '"+"', '<br>VI', 'SIB', 'LE ', 'SUM', ' OF', ' V1', ' AN', ' V2', '<br><br>G', 'TFO', '<br><br>O', 'MG ', '"-', '"<br>V', 'ISI', 'BLE', ' DI', 'FF ', 'OF ', 'V1 ', 'AN ', 'V2<br>', '<br>GT', 'FO<br>', 'OMG', ' "*', '"<br>V', 'ISI', 'BLE', ' PR', 'ODU', 'KT ', 'OF ', 'V1 ', 'AN ', 'V2<br>', '<br>GT', 'FO<br>', '<br>OM', 'G "', '/"<br>', 'VIS', 'IBL', 'E Q', 'UOS', 'HUN', 'T O', 'F V', '1 A', 'N V', '2<br><br>', 'GTF', 'O<br>O', 'MGW', 'TF<br>', 'VIS', 'IBL', 'E "', 'CHO', 'OSE', ' SO', 'ME ', 'OPE', 'RAT', 'ION', '"<br>O', 'IC<br>', '<br>KT', 'HXB', 'YE<br><br>'];
+
+    window.addEventListener("keydown", function() {
+      count++;
+      if (count === code.length + 1) {
+        count = 1;
+      }
+      codeElement.innerHTML += code[count - 1];
+    });
+  </script>
+</body>
+
+</html>
