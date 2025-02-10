@@ -226,7 +226,7 @@ Unfortunately, this app might be completely broken. We are attempting to look in
         </div>
       </td>
       <td id="faketd2">
-        <a id="savebutton" href="javascript:saveAndCloseNote();">&#8678;&nbsp;&nbsp;Save &amp; Close</a>
+        <a id="savebutton">&#8678;&nbsp;&nbsp;Save &amp; Close</a> <!-- href="javascript:saveAndCloseNote();" -->
         <textarea id="textarea"></textarea>
       </td>
     </tr>
@@ -235,8 +235,8 @@ Unfortunately, this app might be completely broken. We are attempting to look in
     /// replace the use of readOnly === false with display === block or something
 
     // variables
-    var notes;
-    var noteNames;
+    var notes = [];
+    var noteNames = [];
 
     var saveButton;
     var table;
@@ -490,6 +490,7 @@ Unfortunately, this app might be completely broken. We are attempting to look in
         document.getElementById("newnote").addEventListener("click", newNote);
         document.getElementById("recovernote").addEventListener("click", recoverNote);
         document.getElementById("deleteallforever").addEventListener("click", deleteAllForever);
+        document.getElementById("savebutton").addEventListener("click", saveAndCloseNote);
         window.addEventListener("beforeunload", LocalStorageIt);
     });
 
