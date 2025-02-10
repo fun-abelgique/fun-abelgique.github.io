@@ -231,7 +231,7 @@ Unfortunately, this app might be completely broken. We are attempting to look in
       </td>
     </tr>
   </table>
-  <script defer>
+  <script>
     /// replace the use of readOnly === false with display === block or something
 
     // variables
@@ -485,12 +485,13 @@ Unfortunately, this app might be completely broken. We are attempting to look in
     }
 
     // event listeners
-    document.getElementById("newnote").addEventListener("click", newNote);
-    document.getElementById("recovernote").addEventListener("click", recoverNote);
-    document.getElementById("deleteallforever").addEventListener("click", deleteAllForever);
-
-    window.addEventListener("load", JavaSScript);
-    window.addEventListener("beforeunload", LocalStorageIt);
+    window.addEventListener("load", function() {
+        JavaSScript();
+        document.getElementById("newnote").addEventListener("click", newNote);
+        document.getElementById("recovernote").addEventListener("click", recoverNote);
+        document.getElementById("deleteallforever").addEventListener("click", deleteAllForever);
+        window.addEventListener("beforeunload", LocalStorageIt);
+    });
 
   </script>
 </body>
