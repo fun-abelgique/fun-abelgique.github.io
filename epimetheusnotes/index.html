@@ -240,7 +240,7 @@ Unfortunately, this app might be completely broken. We are attempting to look in
 
     var saveButton;
     var table;
-    var textarea;
+    var textarea = document.getElementById("textarea");
 
     function JavaSScript() {
       if (localStorage.getItem("notes")) {
@@ -260,7 +260,7 @@ Unfortunately, this app might be completely broken. We are attempting to look in
       } else {
         newNote();
       }
-      textarea = document.getElementById("textarea");
+      
       //otherNoClick = document.getElementById("othernoclick");
     }
 
