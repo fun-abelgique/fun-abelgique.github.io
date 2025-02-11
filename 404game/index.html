@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Alejandro Belgique's website.">
+    <meta name="keywords" content="Alejandro Belgique">
+    <meta name="author" content="Alejandro Belgique">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://abelgique.github.io/style.css">
+    <style>
+        * {
+            text-align: center;
+        }
+        h1, p {
+            margin: initial;
+        }
+    </style>
+    <title>404 Page Not Found - Alejandro Belgique</title>
+</head>
+
+<body>
+    <h1>404: Page Not Found</h1>
+    <p style="margin: 10px;"><a href="/">Return to Home</a></p>
+    <p>&#x2B07; Use WASD (or equivalent on any other layouts) or arrow keys &#x2B07;</p>
+    <iframe srcdoc='
+    
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                body {
+                    background-color: black;
+                    text-align: center;
+                    font-family: sans-serif;
+                }
+                #player {
+                    background-color: red;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                }
+                #coin {
+                    background-color: yellow;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+                #sped {
+                    background-color: white;
+                    color: purple;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    border-radius: 25%;
+                    display: none;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="player"></div>
+            <div id="coin"></div>
+            <div id="sped">sped</div>
+            <script>
+
+                // player object
+                const Player = {
+                    element    : document.getElementById("player"),
+                    x          : 0,
+                    y          : 0,
+                    speed      : 5,
+                    score      : 0,
+                    updatePos  : function() {
+                        if (this.x < 0) {
+                            this.x = 0;
+                        }
+                        if (this.x > 460) {
+                            this.x = 460;
+                        }
+                        if (this.y < 0) {
+                            this.y = 0;
+                        }
+                        if (this.y > 460) {
+                            this.y = 460;
+                        }
+                        this.element.style = "top: "+ this.y +"px; left: "+ this.x +"px;";
+                    },
+                    updateScore: function() {
+                        this.element.innerHTML = this.score;
+                        if ((this.score == 10) || (this.score == 20)) {
+                            Sped.show();
+                        }
+                    }
+                }
+                
+                // coin object
+                const Coin = {
+                    element: document.getElementById("coin"),
+                    x      : 0,
+                    y      : 0,
+                    newPos : function() {
+                        this.x = Math.floor(Math.random() * 461);
+                        this.y = Math.floor(Math.random() * 461);
+                        this.element.style = "top: "+ this.y +"px; left: "+ this.x +"px;";
+                    }
+                }
+                
+                // speed bonus object
+                const Sped = {
+                    element: document.getElementById("sped"),
+                    x      : 0,
+                    y      : 0,
+                    visible: false,
+                    show   : function() {
+                        this.x = Math.floor(Math.random() * 461);
+                        this.y = Math.floor(Math.random() * 461);
+                        this.visible = true;
+                        this.element.style = "top: "+ this.y +"px; left: "+ this.x +"px; display: initial;";
+                    },
+                    hide   : function() {
+                        this.element.style = "display: none;";
+                        this.visible = false;
+                    }
+                }
+                
+                // some functions that need to be called at the start
+                Coin.newPos();
+                Player.updateScore();
+                
+                // checks if player is touching coin enough, updates score and resets coin position
+                function checkForCoin() {
+                    if (((Coin.x - Player.x < 40) && (Coin.x - Player.x > -40)) && ((Coin.y - Player.y < 40) && (Coin.y - Player.y > -40))) {
+                        Player.score += 1;
+                        Player.updateScore();
+                        Coin.newPos();
+                    }
+                }
+                
+                // checks if player is touching sped enough and sped is actually visible, updates speed and hides sped
+                function checkForSped() {
+                    if (((Sped.x - Player.x < 40) && (Sped.x - Player.x > -40)) && ((Sped.y - Player.y < 40) && (Sped.y - Player.y > -40)) && (Sped.visible == true)) {
+                        Player.speed *= 2;
+                        Sped.hide();
+                    }
+                }
+                
+                // player movement
+                window.addEventListener("keydown", function(input) {
+                    if ((input.code == "KeyD") || (input.code == "ArrowRight")) {
+                        if (Player.x < 460) {
+                            Player.x += Player.speed;
+                        }
+                    } else if ((input.code == "KeyA") || (input.code == "ArrowLeft")) {
+                        if (Player.x > 0) {
+                            Player.x -= Player.speed;
+                        }
+                    } else if ((input.code == "KeyW") || (input.code == "ArrowUp")) {
+                        if (Player.y > 0) {
+                            Player.y -= Player.speed;
+                        }
+                    } else if ((input.code == "KeyS") || (input.code == "ArrowDown")) {
+                        if (Player.y < 460) {
+                            Player.y += Player.speed;
+                        }
+                    }
+                    Player.updatePos();
+                    checkForCoin();
+                    checkForSped();
+                });
+
+            </script>
+        </body>
+    </html>
+
+    ' style="width: 500px; height: 500px; border: 2px solid white" autofocus></iframe>
+</body>
+</html>
