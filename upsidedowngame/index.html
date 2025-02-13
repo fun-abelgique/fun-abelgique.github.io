@@ -53,10 +53,16 @@
 
 const player = document.getElementById("player");
 class Spike {
-    class;
+    classs;
     left = 100;
     constructor(type) {
-        this.class = type;
+        this.classs = type;
+    }
+    init() {
+        document.body.innerHTML += "<div class='" + classs + "'></div>";
+    }
+    element(i) {
+        return document.getElementsByClassName(classs + "spike")[i];
     }
 }
 
@@ -69,18 +75,29 @@ let bottomArrayCount = 0;
 const topArray = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 const bottomArray = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950];
 
+let topSpike1 = null;
+
 const interval = setInterval(framePlusPlus, 10);
 
 function framePlusPlus() {
     if (time == topArray[topArrayCount]) {
-
+        if (topSpike1 !== null) {
+            topSpike1 = new Spike("top");
+            topSpike1.init();
+        } else {
+            topSpike2 = new Spike
+        }
+    }
+    if (time == bottomArray[bottomArrayCount]) {
+        bottomSpike1 = new Spike("bottom");
+        bottomSpike1.init();
     }
 
-	document.getElementsByClassName("topspike")[0].style.left = "calc(" + topleft + "% - 30px)";
-	if (topleft >= 0) {
-		topleft -= 0.5;
+	topSpike1.element(0).style.left = "calc(" + topSpike1.left + "% - 30px)";
+	if (topSpike1.left >= 0) {
+		topSpike1.left -= 0.5;
 	} else {
-		topleft = 100;
+		topSpike1.eliminate();
 	}
 
 	if ((topleft - 2 < 1) && (topleft - 2 > -1) && (player.style.top == "0px")) {
