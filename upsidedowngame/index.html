@@ -51,12 +51,14 @@
     <div id="player">:)</div>
     <script>
 
+// player variable and Spike class
 const player = document.getElementById("player");
+
 class Spike {
     classs;
     left = 100;
-    constructor(type) {
-        this.classs = type;
+    constructor(typee) {
+        this.classs = typee;
     }
     init() {
         document.body.innerHTML += "<div class='" + classs + "'></div>";
@@ -64,59 +66,109 @@ class Spike {
     element(i) {
         return document.getElementsByClassName(classs + "spike")[i];
     }
+    eliminate(i) {
+        this.element(i).remove();
+    }
 }
 
-// let topleft = 100;
-// let bottomleft = 100;
+
+// some variables
 let time = 0;
+
+// array storing when to spawn spikes and counters to keep track of where in the arrays the game is
 let topArrayCount = 0;
 let bottomArrayCount = 0;
-
 const topArray = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 const bottomArray = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950];
 
+// the spikes which will become instances of the Spike class
 let topSpike1 = null;
+let topSpike2 = null;
+let bottomSpike1 = null;
+let bottomSpike2 = null;
 
+
+
+// setting the interval and defining what to do every interval
 const interval = setInterval(framePlusPlus, 10);
 
 function framePlusPlus() {
+    // checking for and spawning spikes
     if (time == topArray[topArrayCount]) {
-        if (topSpike1 !== null) {
+        if (topSpike1 === null) {
             topSpike1 = new Spike("top");
             topSpike1.init();
+        } else if (topSpike2 === null) {
+            topSpike2 = new Spike("top");
+            topSpike2.init();
         } else {
-            topSpike2 = new Spike
+            console.log("Too many top spikes at a time - max 2");
         }
     }
+
     if (time == bottomArray[bottomArrayCount]) {
-        bottomSpike1 = new Spike("bottom");
-        bottomSpike1.init();
+        if (bottomSpike1 === null) {
+            bottomSpike1 = new Spike("bottom");
+            bottomSpike1.init();
+        } else if (bottomSpike2 === null) {
+            bottomSpike2 = new Spike("bottom");
+            bottomSpike2.init();
+        } else {
+            console.log("Too many bottom spikes at a time - max 2");
+        }
     }
 
-	topSpike1.element(0).style.left = "calc(" + topSpike1.left + "% - 30px)";
-	if (topSpike1.left >= 0) {
-		topSpike1.left -= 0.5;
-	} else {
-		topSpike1.eliminate();
-	}
 
-	if ((topleft - 2 < 1) && (topleft - 2 > -1) && (player.style.top == "0px")) {
+
+    // moving spikes
+    if (topSpike1 !== null) {
+        topSpike1.element(0).style.left = "calc(" + topSpike1.left + "% - 30px)";
+        if (topSpike1.left >= 0) {
+            topSpike1.left -= 0.5;
+        } else {
+            topSpike1.eliminate(0);
+            topSpike1 = null;
+        }
+    }
+
+    if (topSpike2 !== null) {
+        topSpike2.element(1).style.left = "calc(" + topSpike2.left + "% - 30px)";
+        if (topSpike2.left >= 0) {
+            topSpike2.left -= 0.5;
+        } else {
+            topSpike2.eliminate(0);
+            topSpike2 = null;
+        }
+    }
+
+
+
+    // game over
+	if ((((topSpike1.left - 2 < 1) && (topSpike1.left - 2 > -1)) || ((topSpike2.left - 2 < 1) && (topSpike2.left - 2 > -1))) && (player.style.top == "0px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
 		document.body.innerHTML += "Game Over";
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
 	}
-	if ((bottomleft - 2 < 1.5) && (bottomleft - 2 > -1.5) && (player.style.top == "170px")) {
+
+	if ((((bottomSpike1.left - 2 < 1) && (bottomSpike1.left - 2 > -1)) || ((bottomSpike2.left - 2 < 1) && (bottomSpike2.left - 2 > -1))) && (player.style.top == "170px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
 		document.body.innerHTML += "Game Over";
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
 	}
+
+
+
+    // incrementing game time
     time++;
 }
 
+
+
+// player "jumping" and the event listener to trigger it
 function handleEvent() {
     if (player.style.top == "0px") {
 		player.style.top = "170px";
@@ -129,6 +181,9 @@ function handleEvent() {
 
 window.addEventListener("keydown", handleEvent);
 
+
+
+// to make sure that these styles are considered as such by the js (player jump and game over breaks otherwise)
 player.style.top = "0px";
 player.style.transform = "rotate(-90deg)";
     </script>
