@@ -49,50 +49,71 @@
 <body>
     <div id="floor"></div>
     <div id="player">:)</div>
-	<div class="topspike"></div>
     <script>
-let topleft = 100;
-let bottomleft = 100;
+
+const player = document.getElementById("player");
+class Spike {
+    class;
+    left = 100;
+    constructor(type) {
+        this.class = type;
+    }
+}
+
+// let topleft = 100;
+// let bottomleft = 100;
+let time = 0;
+let topArrayCount = 0;
+let bottomArrayCount = 0;
+
+const topArray = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+const bottomArray = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950];
 
 const interval = setInterval(framePlusPlus, 10);
 
 function framePlusPlus() {
+    if (time == topArray[topArrayCount]) {
+
+    }
+
 	document.getElementsByClassName("topspike")[0].style.left = "calc(" + topleft + "% - 30px)";
 	if (topleft >= 0) {
 		topleft -= 0.5;
 	} else {
 		topleft = 100;
 	}
-	if ((topleft - 2 < 1.5) && (topleft - 2 > -1.5) && (document.getElementById("player").style.top == "0px")) {
+
+	if ((topleft - 2 < 1) && (topleft - 2 > -1) && (player.style.top == "0px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
 		document.body.innerHTML += "Game Over";
-		document.getElementById("player").style.top = "0px";
-		document.getElementById("player").style.transform = "rotate(-90deg)";
+		player.style.top = "0px";
+		player.style.transform = "rotate(-90deg)";
 	}
-	if ((bottomleft - 2 < 1.5) && (bottomleft - 2 > -1.5) && (document.getElementById("player").style.top == "170px")) {
+	if ((bottomleft - 2 < 1.5) && (bottomleft - 2 > -1.5) && (player.style.top == "170px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
 		document.body.innerHTML += "Game Over";
-		document.getElementById("player").style.top = "170px";
-		document.getElementById("player").style.transform = "rotate(90deg)";
+		player.style.top = "170px";
+		player.style.transform = "rotate(90deg)";
 	}
+    time++;
 }
 
 function handleEvent() {
-    if (document.getElementById("player").style.top == "0px") {
-		document.getElementById("player").style.top = "170px";
-		document.getElementById("player").style.transform = "rotate(90deg)";
+    if (player.style.top == "0px") {
+		player.style.top = "170px";
+		player.style.transform = "rotate(90deg)";
 	} else {
-		document.getElementById("player").style.top = "0px";
-		document.getElementById("player").style.transform = "rotate(-90deg)";
+		player.style.top = "0px";
+		player.style.transform = "rotate(-90deg)";
 	}
 }
 
 window.addEventListener("keydown", handleEvent);
 
-document.getElementById("player").style.top = "0px";
-document.getElementById("player").style.transform = "rotate(-90deg)";
+player.style.top = "0px";
+player.style.transform = "rotate(-90deg)";
     </script>
 </body>
 
