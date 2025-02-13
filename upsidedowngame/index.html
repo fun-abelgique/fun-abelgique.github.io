@@ -7,6 +7,9 @@
     <meta name="author" content="Alejandro Belgique">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+				body {
+						text-align: center;
+				}
         #floor {
             position: absolute;
             top: 200px;
@@ -21,13 +24,17 @@
             width: 30px;
             height: 30px;
             background-color: red;
-            left: 20px;
+            left: 2%;
+						transform: rotate(-90deg);
+						text-align: center;
+						transition: 80ms all;
         }
         .topspike {
             position: absolute;
             width: 30px;
             height: 30px;
             top: 0px;
+						left: calc(100% - 30px);
             background-color: blue;
         }
         .bottomspike {
@@ -42,8 +49,46 @@
 <body>
     <div id="floor"></div>
     <div id="player">:)</div>
+		<div class="topspike"></div>
     <script>
+let topleft = 100;
+let bottomleft = 100;
 
+const interval = setInterval(framePlusPlus, 10);
+
+function framePlusPlus() {
+	document.getElementsByClassName("topspike")[0].style.left = "calc(" + topleft + "% - 30px)";
+	if (topleft >= 0) {
+		topleft -= 0.5;
+	} else {
+		topleft = 100;
+	}
+	if ((topleft - 2 < 1.5) && (topleft - 2 > -1.5) && (document.getElementById("player").style.top == "0px")) {
+		clearInterval(interval);
+		document.body.innerHTML += "Game Over";
+		document.getElementById("player").style.top = "0px";
+		document.getElementById("player").style.transform = "rotate(-90deg)";
+	}
+	if ((bottomleft - 2 < 1.5) && (bottomleft - 2 > -1.5) && (document.getElementById("player").style.top == "170px")) {
+		clearInterval(interval);
+		document.body.innerHTML += "Game Over";
+		document.getElementById("player").style.top = "170px";
+		document.getElementById("player").style.transform = "rotate(90deg)";
+	}
+}
+
+window.addEventListener("keydown", function(){
+	if (document.getElementById("player").style.top == "0px") {
+		document.getElementById("player").style.top = "170px";
+		document.getElementById("player").style.transform = "rotate(90deg)";
+	} else {
+		document.getElementById("player").style.top = "0px";
+		document.getElementById("player").style.transform = "rotate(-90deg)";
+	}
+});
+
+document.getElementById("player").style.top = "0px";
+document.getElementById("player").style.transform = "rotate(-90deg)";
     </script>
 </body>
 
