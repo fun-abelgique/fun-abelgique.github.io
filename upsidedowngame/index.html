@@ -67,7 +67,7 @@ class Spike {
         document.body.innerHTML += "<div class='" + this.classs + "spike'></div>";
     }
     get element() {
-        return document.getElementsByClassName(this.classs + "spike")[i];
+        return document.getElementsByClassName(this.classs + "spike")[this.i];
     }
     eliminate() {
         this.element.remove();
