@@ -62,10 +62,10 @@ class Spike {
         this.classs = typee;
     }
     init() {
-        document.body.innerHTML += "<div class='" + classs + "'></div>";
+        document.body.innerHTML += "<div class='" + this.classs + "'></div>";
     }
     element(i) {
-        return document.getElementsByClassName(classs + "spike")[i];
+        return document.getElementsByClassName(this.classs + "spike")[i];
     }
     eliminate(i) {
         this.element(i).remove();
