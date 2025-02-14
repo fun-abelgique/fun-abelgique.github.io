@@ -67,6 +67,7 @@ class Spike {
         if (document.getElementsByClassName(this.classs + "spike")[this.i] == undefined) {
             document.body.innerHTML += "<div class='" + this.classs + "spike'></div>";
         }
+        this.element.style.display = "initial";
     }
     get element() {
         return document.getElementsByClassName(this.classs + "spike")[this.i];
