@@ -64,7 +64,7 @@ class Spike {
         this.i = ii;
     }
     init() {
-        document.body.innerHTML += "<div class='" + this.classs + "'></div>";
+        document.body.innerHTML += "<div class='" + this.classs + "spike'></div>";
     }
     get element() {
         return document.getElementsByClassName(this.classs + "spike")[i];
@@ -85,10 +85,10 @@ const topArray = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 const bottomArray = [50, 150, 250, 350, 450, 550, 650, 750, 850, 950];
 
 // the spikes which will become instances of the Spike class
-let topSpike1 = null;
-let topSpike2 = null;
-let bottomSpike1 = null;
-let bottomSpike2 = null;
+let topSpike1 = "null";
+let topSpike2 = "null";
+let bottomSpike1 = "null";
+let bottomSpike2 = "null";
 
 
 
@@ -98,10 +98,10 @@ const interval = setInterval(framePlusPlus, 10);
 function framePlusPlus() {
     // checking for and spawning spikes
     if (time == topArray[topArrayCount]) {
-        if (topSpike1 === null) {
+        if (topSpike1 === "null") {
             topSpike1 = new Spike("top", 0);
             topSpike1.init();
-        } else if (topSpike2 === null) {
+        } else if (topSpike2 === "null") {
             topSpike2 = new Spike("top", 1);
             topSpike2.init();
         } else {
@@ -110,10 +110,10 @@ function framePlusPlus() {
     }
 
     if (time == bottomArray[bottomArrayCount]) {
-        if (bottomSpike1 === null) {
+        if (bottomSpike1 === "null") {
             bottomSpike1 = new Spike("bottom", 0);
             bottomSpike1.init();
-        } else if (bottomSpike2 === null) {
+        } else if (bottomSpike2 === "null") {
             bottomSpike2 = new Spike("bottom", 1);
             bottomSpike2.init();
         } else {
@@ -124,43 +124,43 @@ function framePlusPlus() {
 
 
     // moving spikes
-    if (topSpike1 !== null) {
+    if (topSpike1 !== "null") {
         topSpike1.element.style.left = "calc(" + topSpike1.left + "% - 30px)";
         if (topSpike1.left >= 0) {
             topSpike1.left -= 0.5;
         } else {
             topSpike1.eliminate();
-            topSpike1 = null;
+            topSpike1 = "null";
         }
     }
 
-    if (topSpike2 !== null) {
+    if (topSpike2 !== "null") {
         topSpike2.element.style.left = "calc(" + topSpike2.left + "% - 30px)";
         if (topSpike2.left >= 0) {
             topSpike2.left -= 0.5;
         } else {
             topSpike2.eliminate();
-            topSpike2 = null;
+            topSpike2 = "null";
         }
     }
 
-    if (bottomSpike1 !== null) {
+    if (bottomSpike1 !== "null") {
         bottomSpike1.element.style.left = "calc(" + bottomSpike1.left + "% - 30px)";
         if (bottomSpike1.left >= 0) {
             bottomSpike1.left -= 0.5;
         } else {
             bottomSpike1.eliminate();
-            bottomSpike1 = null;
+            bottomSpike1 = "null";
         }
     }
 
-    if (bottomSpike2 !== null) {
+    if (bottomSpike2 !== "null") {
         bottomSpike2.element.style.left = "calc(" + bottomSpike2.left + "% - 30px)";
         if (bottomSpike2.left >= 0) {
             bottomSpike2.left -= 0.5;
         } else {
             bottomSpike2.eliminate();
-            bottomSpike2 = null;
+            bottomSpike2 = "null";
         }
     }
 
