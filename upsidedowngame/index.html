@@ -58,7 +58,7 @@ const player = document.getElementById("player");
 class Spike {
     classs;
     left = 100;
-    i = 0;
+    i;
     constructor(typee, ii) {
         this.classs = typee;
         this.i = ii;
@@ -101,9 +101,11 @@ function framePlusPlus() {
         if (topSpike1 === "null") {
             topSpike1 = new Spike("top", 0);
             topSpike1.init();
+            console.log("topSpike1 initialized");
         } else if (topSpike2 === "null") {
             topSpike2 = new Spike("top", 1);
             topSpike2.init();
+            console.log("topSpike2 initialized");
         } else {
             console.log("Too many top spikes at a time - max 2");
         }
@@ -113,9 +115,11 @@ function framePlusPlus() {
         if (bottomSpike1 === "null") {
             bottomSpike1 = new Spike("bottom", 0);
             bottomSpike1.init();
+            console.log("bottomSpike1 initialized");
         } else if (bottomSpike2 === "null") {
             bottomSpike2 = new Spike("bottom", 1);
             bottomSpike2.init();
+            console.log("bottomSpike2 initialized");
         } else {
             console.log("Too many bottom spikes at a time - max 2");
         }
@@ -128,9 +132,11 @@ function framePlusPlus() {
         topSpike1.element.style.left = "calc(" + topSpike1.left + "% - 30px)";
         if (topSpike1.left >= 0) {
             topSpike1.left -= 0.5;
+            console.log('topSpike1 moved');
         } else {
             topSpike1.eliminate();
             topSpike1 = "null";
+            console.log('topSpike1 eliminated');
         }
     }
 
@@ -138,9 +144,11 @@ function framePlusPlus() {
         topSpike2.element.style.left = "calc(" + topSpike2.left + "% - 30px)";
         if (topSpike2.left >= 0) {
             topSpike2.left -= 0.5;
+            console.log('topSpike2 moved');
         } else {
             topSpike2.eliminate();
             topSpike2 = "null";
+            console.log('topSpike2 eliminated');
         }
     }
 
@@ -148,9 +156,11 @@ function framePlusPlus() {
         bottomSpike1.element.style.left = "calc(" + bottomSpike1.left + "% - 30px)";
         if (bottomSpike1.left >= 0) {
             bottomSpike1.left -= 0.5;
+            console.log('bottomSpike1 moved');
         } else {
             bottomSpike1.eliminate();
             bottomSpike1 = "null";
+            console.log('bottomSpike1 eliminated');
         }
     }
 
@@ -158,9 +168,11 @@ function framePlusPlus() {
         bottomSpike2.element.style.left = "calc(" + bottomSpike2.left + "% - 30px)";
         if (bottomSpike2.left >= 0) {
             bottomSpike2.left -= 0.5;
+            console.log('bottomSpike2 moved');
         } else {
             bottomSpike2.eliminate();
             bottomSpike2 = "null";
+            console.log('bottomSpike2 eliminated');
         }
     }
 
@@ -173,6 +185,7 @@ function framePlusPlus() {
 		document.body.innerHTML += "Game Over";
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
+        console.log('Game Over by top spike');
 	}
 
 	if ((((bottomSpike1.left - 2 < 1) && (bottomSpike1.left - 2 > -1)) || ((bottomSpike2.left - 2 < 1) && (bottomSpike2.left - 2 > -1))) && (player.style.top == "170px")) {
@@ -181,6 +194,7 @@ function framePlusPlus() {
 		document.body.innerHTML += "Game Over";
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
+        console.log('Game Over by bottom spike');
 	}
 
 
@@ -197,9 +211,11 @@ function handleEvent() {
     if (player.style.top == "0px") {
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
+        console.log('Player jumped to bottom');
 	} else {
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
+        console.log('Player jumped to top');
 	}
 }
 
