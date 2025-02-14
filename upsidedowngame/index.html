@@ -184,7 +184,7 @@ function framePlusPlus() {
 	if ((((topSpike1.left - 2 < 1) && (topSpike1.left - 2 > -1)) || ((topSpike2.left - 2 < 1) && (topSpike2.left - 2 > -1))) && (player.style.top == "0px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
-		document.body.innerHTML += "Game Over";
+		document.getElementById("floor").innerHTML += "Game Over";
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
         console.log('Game Over by top spike');
@@ -194,7 +194,7 @@ function framePlusPlus() {
 	if ((((bottomSpike1.left - 2 < 1) && (bottomSpike1.left - 2 > -1)) || ((bottomSpike2.left - 2 < 1) && (bottomSpike2.left - 2 > -1))) && (player.style.top == "170px")) {
 		clearInterval(interval);
         removeEventListener("keydown", handleEvent);
-		document.body.innerHTML += "Game Over";
+		document.getElementById("floor").innerHTML += "Game Over";
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
         console.log('Game Over by bottom spike');
@@ -221,7 +221,7 @@ function handleEvent() {
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
         console.log('Player jumped to bottom');
-	} else {
+	} else if (player.style.top == "170px") {
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
         console.log('Player jumped to top');
