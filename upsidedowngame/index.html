@@ -64,7 +64,7 @@ class Spike {
         this.i = ii;
     }
     init() {
-        if (document.getElementsByClassName(this.classs + "spike")[this.i]) {
+        if (document.getElementsByClassName(this.classs + "spike")[this.i] == undefined) {
             document.body.innerHTML += "<div class='" + this.classs + "spike'></div>";
         }
     }
