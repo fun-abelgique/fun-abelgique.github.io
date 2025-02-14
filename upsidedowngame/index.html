@@ -205,7 +205,7 @@ function framePlusPlus() {
 
     // incrementing game time
     time++;
-    if (gameOver = false) {
+    if (gameOver == false) {
         requestAnimationFrame(framePlusPlus);
     }
     document.getElementById("floor").innerHTML = time;
