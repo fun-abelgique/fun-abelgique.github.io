@@ -78,6 +78,7 @@ class Spike {
 
 // some variables
 let time = 0;
+let gameOver = false;
 
 // array storing when to spawn spikes and counters to keep track of where in the arrays the game is
 let topArrayCount = 0;
@@ -93,9 +94,7 @@ let bottomSpike2 = "null";
 
 
 
-// setting the interval and defining what to do every interval
-const interval = setInterval(framePlusPlus, 10);
-
+// what to do every animation frame and starting the cycle
 function framePlusPlus() {
     // checking for and spawning spikes
     if (time == topArray[topArrayCount]) {
@@ -189,6 +188,7 @@ function framePlusPlus() {
 		player.style.top = "0px";
 		player.style.transform = "rotate(-90deg)";
         console.log('Game Over by top spike');
+        gameOver = true;
 	}
 
 	if ((((bottomSpike1.left - 2 < 1) && (bottomSpike1.left - 2 > -1)) || ((bottomSpike2.left - 2 < 1) && (bottomSpike2.left - 2 > -1))) && (player.style.top == "170px")) {
@@ -198,14 +198,20 @@ function framePlusPlus() {
 		player.style.top = "170px";
 		player.style.transform = "rotate(90deg)";
         console.log('Game Over by bottom spike');
+        gameOver = true;
 	}
 
 
 
     // incrementing game time
     time++;
+    if (gameOver = false) {
+        requestAnimationFrame(framePlusPlus);
+    }
     document.getElementById("floor").innerHTML = time;
 }
+
+requestAnimationFrame(framePlusPlus);
 
 
 
@@ -220,7 +226,6 @@ function handleEvent() {
 		player.style.transform = "rotate(-90deg)";
         console.log('Player jumped to top');
 	}
-    player.offsetHeight;
 }
 
 window.addEventListener("keydown", handleEvent);
